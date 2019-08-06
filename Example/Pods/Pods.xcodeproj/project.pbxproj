@@ -14,7 +14,7 @@
 		236173C6AE4E396DD25391053E4A2EC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		30A582B01434D9D577B3E8258CEEBE31 /* Pods-AMChromeCastNew_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673728D5FFD104FFDA92E6D8FFD32B1 /* Pods-AMChromeCastNew_Example-dummy.m */; };
 		39335ED16C1D403462CA72A7D3D639F2 /* Pods-AMChromeCastNew_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1060141CE6AAF8E0C6ACDEAF01F454D6 /* Pods-AMChromeCastNew_Tests-dummy.m */; };
-		7B8F15896FAD7938A7A66CE8197E71EA /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EC00D2EE35C5AAC5481A42E80D0EF0 /* ReplaceMe.swift */; };
+		697BCBCF22F959E600B2925D /* AMChromeCastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697BCBCE22F959E600B2925D /* AMChromeCastHelper.swift */; };
 		8DCC08B26214AABD9278E9D0B3B3824B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		B10D752976E59283626370116D9BD142 /* AMChromeCastNew-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 12140F509A612D982AF800BE04B79249 /* AMChromeCastNew-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -52,9 +52,9 @@
 		32FDBE0258035867A25CC520896D459E /* AMChromeCastNew.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AMChromeCastNew.xcconfig; sourceTree = "<group>"; };
 		5E3E7B781D13AEEF22E9E2727DA9214C /* AMChromeCastNew.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AMChromeCastNew.modulemap; sourceTree = "<group>"; };
 		6149A7F155148AB0978E4B08D79B6531 /* Pods-AMChromeCastNew_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AMChromeCastNew_Tests-umbrella.h"; sourceTree = "<group>"; };
+		697BCBCE22F959E600B2925D /* AMChromeCastHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AMChromeCastHelper.swift; path = AMChromeCastNew/Classes/AMChromeCastHelper.swift; sourceTree = "<group>"; };
 		6A0BE508804D9F53CFFB7BB742CBD2C0 /* Pods-AMChromeCastNew_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AMChromeCastNew_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		74B289137BB79D04D98DECC79C3561B6 /* Pods-AMChromeCastNew_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AMChromeCastNew_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		80EC00D2EE35C5AAC5481A42E80D0EF0 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = AMChromeCastNew/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		85A9899729F29CEF20EA57E1DE48AB52 /* AMChromeCastNew-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AMChromeCastNew-dummy.m"; sourceTree = "<group>"; };
 		8D41D1849C8E231EE7A3B4C0D96FCB6B /* Pods-AMChromeCastNew_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AMChromeCastNew_Tests-Info.plist"; sourceTree = "<group>"; };
 		9466D5143024B26EE35CD7C888071C5C /* Pods-AMChromeCastNew_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AMChromeCastNew_Example-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -180,9 +180,9 @@
 		D0DFD91E47405D0C1515338DB0F77729 /* AMChromeCastNew */ = {
 			isa = PBXGroup;
 			children = (
-				80EC00D2EE35C5AAC5481A42E80D0EF0 /* ReplaceMe.swift */,
 				82889168FA6719E4BF1AFC7C8D4D9363 /* Pod */,
 				18273C9B1CCFAFCAE1916BF8D4068C6B /* Support Files */,
+				697BCBCE22F959E600B2925D /* AMChromeCastHelper.swift */,
 			);
 			name = AMChromeCastNew;
 			path = ../..;
@@ -315,6 +315,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
+				TargetAttributes = {
+					A219A3D23F9AF9EE5081CA59DC234469 = {
+						LastSwiftMigration = 1030;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -380,8 +385,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				697BCBCF22F959E600B2925D /* AMChromeCastHelper.swift in Sources */,
 				01009F85815F763F975DF7C3A73F6318 /* AMChromeCastNew-dummy.m in Sources */,
-				7B8F15896FAD7938A7A66CE8197E71EA /* ReplaceMe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +445,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32FDBE0258035867A25CC520896D459E /* AMChromeCastNew.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -505,6 +511,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32FDBE0258035867A25CC520896D459E /* AMChromeCastNew.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -525,6 +532,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
