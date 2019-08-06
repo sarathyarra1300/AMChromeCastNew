@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AMChromeCastNew_Example' do
+  pod 'AMChromeCastNew', :path => '../'
+
+  target 'AMChromeCastNew_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
