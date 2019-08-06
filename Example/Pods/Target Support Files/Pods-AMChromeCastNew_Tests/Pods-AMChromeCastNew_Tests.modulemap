@@ -1,0 +1,6 @@
+framework module Pods_AMChromeCastNew_Tests {
+  umbrella header "Pods-AMChromeCastNew_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

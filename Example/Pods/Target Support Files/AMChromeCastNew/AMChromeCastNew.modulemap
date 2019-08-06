@@ -1,0 +1,6 @@
+framework module AMChromeCastNew {
+  umbrella header "AMChromeCastNew-umbrella.h"
+
+  export *
+  module * { export * }
+}

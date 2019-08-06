@@ -1,0 +1,6 @@
+framework module Pods_AMChromeCastNew_Example {
+  umbrella header "Pods-AMChromeCastNew_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
