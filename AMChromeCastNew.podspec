@@ -38,8 +38,8 @@ s.source_files ='AMChromeCastNew/Classes/*.swift'
 # s.resource_bundles = {
 #   'AMChromeCastNew' => ['AMChromeCastNew/Assets/*.png']
 # }
-
+  s.static_framework = true
 # s.public_header_files = 'Pod/Classes/**/*.h'
-# s.frameworks = 'UIKit', 'MapKit'
-# s.dependency 'AFNetworking', '~> 2.3'
+ s.frameworks = 'UIKit', 'MapKit'
+ s.dependency 'google-cast-sdk', '~> 4.4.2'
 end
