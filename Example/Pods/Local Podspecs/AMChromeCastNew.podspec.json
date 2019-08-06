@@ -1,9 +1,8 @@
 {
   "name": "AMChromeCastNew",
   "version": "0.1.0",
-  "summary": "A short description of AMChromeCastNew.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/sarath.yarra1300@gmail.com/AMChromeCastNew",
+  "summary": "Wrapper class to handle chrome cast behaviour on iOS.",
+  "homepage": "https://github.com/sarathyarra1300/AMChromeCastNew",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,11 +11,23 @@
     "sarath.yarra1300@gmail.com": "sarath.yarra1300@gmail.com"
   },
   "source": {
-    "git": "https://github.com/sarath.yarra1300@gmail.com/AMChromeCastNew.git",
+    "git": "https://github.com/sarathyarra1300/AMChromeCastNew.git",
     "tag": "0.1.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
-  "source_files": "AMChromeCastNew/Classes/**/*"
+  "swift_versions": "4.0",
+  "frameworks": [
+    "UIKit",
+    "MapKit"
+  ],
+  "source_files": "AMChromeCastNew/Classes/*.swift",
+  "static_framework": true,
+  "dependencies": {
+    "google-cast-sdk": [
+      "~> 4.4.2"
+    ]
+  },
+  "swift_version": "4.0"
 }

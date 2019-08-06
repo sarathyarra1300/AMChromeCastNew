@@ -1,15 +1,29 @@
 PODS:
-  - AMChromeCastNew (0.1.0)
+  - AMChromeCastNew (0.1.0):
+    - google-cast-sdk (~> 4.4.2)
+  - google-cast-sdk (4.4.3):
+    - google-cast-sdk/Core (= 4.4.3)
+    - Protobuf (~> 3.0)
+  - google-cast-sdk/Core (4.4.3):
+    - Protobuf (~> 3.0)
+  - Protobuf (3.9.0)
 
 DEPENDENCIES:
   - AMChromeCastNew (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - google-cast-sdk
+    - Protobuf
 
 EXTERNAL SOURCES:
   AMChromeCastNew:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AMChromeCastNew: 28b91096a879cb56852fa5e8763ea590753fdbb3
+  AMChromeCastNew: 6090a1cc5e6ab421e9b614b131ade9b116e3b325
+  google-cast-sdk: fad0b26723a820bad54f550b2240810dc0fe53b9
+  Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
 
 PODFILE CHECKSUM: 0f18bf4d1b7278d18fd2f47cd2097a1224e00715
 
