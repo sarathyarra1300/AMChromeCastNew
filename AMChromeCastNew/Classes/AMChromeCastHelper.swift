@@ -431,7 +431,7 @@ import StoreKit
             requesst?.delegate = self
             
             self._castSession?.remoteMediaClient?.add(self as GCKRemoteMediaClientListener)
-            self._castSession?.remoteMediaClient?.setStreamVolume(self._sliderFloatValue!)
+            self._castSession?.remoteMediaClient?.setStreamVolume(0.5)
         }
         
     }
