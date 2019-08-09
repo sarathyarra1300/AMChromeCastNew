@@ -393,6 +393,7 @@ import StoreKit
     
     // By using this mehtod we have to play the content in chrome cast
     @objc public  func playTheContentInChromeCast(mediaInform : AMMediaInformation) {
+         self._castSession = _sessionManager?.currentCastSession
         _mediaInformation = mediaInform
         var playPosition = TimeInterval()
         if _mediaInformation?.currentPlaybackTime != nil {
