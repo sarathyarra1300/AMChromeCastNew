@@ -251,7 +251,7 @@ import StoreKit
                 }
                 else {
                     drmUrl = mediaInformation.licenseUrl
-                    contentType = "videos/mpd"
+                    contentType = "video/mp4"
                 }
             }
             
