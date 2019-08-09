@@ -468,6 +468,24 @@ import StoreKit
         print("\(#function), \(request), abortReason = \(Float((abortReason).rawValue))")
     }
     
+    func remoteMediaClientDidUpdateQueue(_ client: GCKRemoteMediaClient) {
+    }
+    
+    func remoteMediaClient(_ client: GCKRemoteMediaClient, didUpdate mediaMetadata: GCKMediaMetadata?) {
+       
+    }
+    
+    func remoteMediaClient(_ client: GCKRemoteMediaClient, didStartMediaSessionWithID sessionID: Int) {
+        
+    }
+    
+    func remoteMediaClientDidUpdatePreloadStatus(_ client: GCKRemoteMediaClient) {
+        
+    }
+    func remoteMediaClient(_ client: GCKRemoteMediaClient, didUpdate mediaStatus: GCKMediaStatus?) {
+        
+    }
+    
 
     
     
