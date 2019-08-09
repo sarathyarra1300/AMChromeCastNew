@@ -175,8 +175,11 @@ import GoogleCast
                 if let title = mediaInformation.contentTitle {
                     metaDataAds?.setString(title as String, forKey: kGCKMetadataKeyTitle)
                 }
-                metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
-                metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
+                if mediaInformation.imageUrl != nil {
+                    metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
+                    metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
+                }
+               
                 
                 let streamType = GCKMediaStreamType.buffered
                 let contentType = _mediaInformation?.contentFormate
@@ -208,9 +211,10 @@ import GoogleCast
             if _strSubTitle != nil {
                 metadata?.setString(mediaInformation.subTitle!, forKey: kGCKMetadataKeySubtitle)
             }
-            metadata?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
-            metadata?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
-            
+            if mediaInformation.imageUrl != nil {
+                metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
+                metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
+            }
             let streamType = ((mediaInformation.contentType == AMChromeCastHelper.kLive) || (mediaInformation.contentType == AMChromeCastHelper.kProgram)) ? GCKMediaStreamType.live : GCKMediaStreamType.buffered
             var playUrl : String = ""
             if mediaInformation.videoUrl != nil {
@@ -220,6 +224,7 @@ import GoogleCast
             if playUrl.contains("mpd") {
                 contentType = "videos/mpd"
             }
+            _videoPlayURL = playUrl
             var drmUrl : String?
             if mediaInformation.playFairPlay == true {
                 if playUrl.contains("dlb.ism") {
