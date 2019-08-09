@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleCast
+import StoreKit
 
 @objc public protocol AMChromeCastHelperDelegate: NSObjectProtocol {
     @objc func getstreamUrl(completionHandler:(_ streamUrl:String?,_ videoInfo: [AnyHashable: Any]?,_ error: Error?) -> Void)
@@ -453,6 +454,19 @@ import GoogleCast
     public func sessionManager(_ sessionManager: GCKSessionManager, didFailToStart session: GCKSession, withError error: Error) {
         
     }
+    
+    private func requestDidComplete(_ request: GCKRequest) {
+        print("\(#function), \(request)")
+    }
+    private func request(_ request: SKRequest, didFailWithError error: Error) {
+        print("\(#function), \(request), error = \(error)")
+    }
+    func request(_ request: GCKRequest, didAbortWith abortReason: GCKRequestAbortReason) {
+        print("\(#function), \(request), abortReason = \(Float((abortReason).rawValue))")
+    }
+    
+
+    
     
     
     
