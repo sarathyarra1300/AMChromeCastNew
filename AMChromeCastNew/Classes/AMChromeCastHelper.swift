@@ -10,7 +10,7 @@ import GoogleCast
 
 @objc public protocol AMChromeCastHelperDelegate: NSObjectProtocol {
     @objc func getstreamUrl(completionHandler:(_ streamUrl:String?,_ videoInfo: [AnyHashable: Any]?,_ error: Error?) -> Void)
-    func getMediaInformation(completionHandler:(_ mediaObject:MediaInformation?, _ playBackMode : PlaybackMode) -> Void)
+    func getMediaInformation(completionHandler:(_ mediaObject:AMMediaInformation?, _ playBackMode : PlaybackMode) -> Void)
     func isDeviceConnectedTochromeCast(isconnected :Bool)
 }
 
@@ -28,7 +28,7 @@ import GoogleCast
     @objc public let kReceiverAppID = ""
     var _sessionManager : GCKSessionManager?
     var _castMediaController: GCKUIMediaController?
-    var _mediaInformation : MediaInformation?
+    var _mediaInformation : AMMediaInformation?
     
     public var _playbackMode = PlaybackMode(rawValue: 0)
     @objc public    var _castSession: GCKCastSession?
@@ -163,7 +163,7 @@ import GoogleCast
         
     }
     
-    func buildMediaInformation(mediaInformation : MediaInformation, withCompletion completionHandler: @escaping GckMediaInfoWithCompletionHandler)
+    func buildMediaInformation(mediaInformation : AMMediaInformation, withCompletion completionHandler: @escaping GckMediaInfoWithCompletionHandler)
     {
         var metadata: GCKMediaMetadata? = nil
         var metaDataAds : GCKMediaMetadata? = nil
@@ -380,7 +380,7 @@ import GoogleCast
     }
     
     // By using this mehtod we have to play the content in chrome cast
-    @objc public  func playTheContentInChromeCast(mediaInform : MediaInformation) {
+    @objc public  func playTheContentInChromeCast(mediaInform : AMMediaInformation) {
         _mediaInformation = mediaInform
         var playPosition = TimeInterval()
         if _mediaInformation?.currentPlaybackTime != nil {
