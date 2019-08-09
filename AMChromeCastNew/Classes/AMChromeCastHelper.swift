@@ -90,7 +90,7 @@ import GoogleCast
     }
     
     //MARK : checking for chrome cast is connected or not
-    func hasConnectedSession() -> Bool {
+ @objc public   func hasConnectedSession() -> Bool {
         if let sessionManager = _sessionManager {
             return sessionManager.hasConnectedSession()
         }
@@ -102,7 +102,7 @@ import GoogleCast
         
     }
     //MARK : play the content in remote
-    func switchToRemotePlayback() {
+@objc public  func switchToRemotePlayback() {
         if self.hasConnectedSession() == true {
             self._castSession = _sessionManager?.currentCastSession
             if _playbackMode == PlaybackMode.local {
