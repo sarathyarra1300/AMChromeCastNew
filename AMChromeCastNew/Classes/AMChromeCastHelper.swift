@@ -374,7 +374,12 @@ import GoogleCast
                 mediaInfoBuilder.streamType = streamType
                 mediaInfoBuilder.contentType = contentType
                 mediaInfoBuilder.metadata = metadata
-                mediaInfoBuilder.streamDuration = duration!
+                if duration != nil {
+                    mediaInfoBuilder.streamDuration = duration!
+                }
+                else {
+                    mediaInformation.streamDuration = "100"
+                }
                 mediaInfoBuilder.mediaTracks = tracks
                 mediaInfoBuilder.textTrackStyle = nil
                 mediaInfoBuilder.customData = customData
