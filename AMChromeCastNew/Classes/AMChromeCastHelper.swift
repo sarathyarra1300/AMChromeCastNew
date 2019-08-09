@@ -464,25 +464,25 @@ import StoreKit
     private func request(_ request: SKRequest, didFailWithError error: Error) {
         print("\(#function), \(request), error = \(error)")
     }
-    func request(_ request: GCKRequest, didAbortWith abortReason: GCKRequestAbortReason) {
+    private func request(_ request: GCKRequest, didAbortWith abortReason: GCKRequestAbortReason) {
         print("\(#function), \(request), abortReason = \(Float((abortReason).rawValue))")
     }
     
-    func remoteMediaClientDidUpdateQueue(_ client: GCKRemoteMediaClient) {
+    private func remoteMediaClientDidUpdateQueue(_ client: GCKRemoteMediaClient) {
     }
     
-    func remoteMediaClient(_ client: GCKRemoteMediaClient, didUpdate mediaMetadata: GCKMediaMetadata?) {
+    private func remoteMediaClient(_ client: GCKRemoteMediaClient, didUpdate mediaMetadata: GCKMediaMetadata?) {
        
     }
     
-    func remoteMediaClient(_ client: GCKRemoteMediaClient, didStartMediaSessionWithID sessionID: Int) {
+    private func remoteMediaClient(_ client: GCKRemoteMediaClient, didStartMediaSessionWithID sessionID: Int){
         
     }
-    
-    func remoteMediaClientDidUpdatePreloadStatus(_ client: GCKRemoteMediaClient) {
+
+    private func remoteMediaClientDidUpdatePreloadStatus(_ client: GCKRemoteMediaClient) {
         
     }
-    func remoteMediaClient(_ client: GCKRemoteMediaClient, didUpdate mediaStatus: GCKMediaStatus?) {
+    private func remoteMediaClient(_ client: GCKRemoteMediaClient, didUpdate mediaStatus: GCKMediaStatus?) {
         
     }
     
