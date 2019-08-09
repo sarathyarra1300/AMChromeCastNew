@@ -25,7 +25,7 @@ import GoogleCast
 
 @objc public class AMChromeCastHelper: NSObject,GCKLoggerDelegate,GCKSessionManagerListener,GCKDiscoveryManagerListener,GCKRequestDelegate {
     @objc public  static let sharedInstance: AMChromeCastHelper = { AMChromeCastHelper() }()
-    @objc public let kReceiverAppID = ""
+    @objc public var kReceiverAppID = ""
     var _sessionManager : GCKSessionManager?
     var _castMediaController: GCKUIMediaController?
     var _mediaInformation : AMMediaInformation?
@@ -66,7 +66,8 @@ import GoogleCast
         GCKMediaInformation, _ error: Error?) -> Void
     
     //MARK : Initilize the chrome cast
-    @objc public   func initializeGoogleChromeCast() {
+    @objc public   func initializeGoogleChromeCast(receiverId : String) {
+        kReceiverAppID = receiverId
         let criteria = GCKDiscoveryCriteria(applicationID: kReceiverAppID)
         let options = GCKCastOptions.init(discoveryCriteria: criteria)
         GCKCastContext.setSharedInstanceWith(options)
