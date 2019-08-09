@@ -140,6 +140,7 @@ import StoreKit
                     }
                     let requesst : GCKRequest? = self._castSession?.remoteMediaClient?.queueLoad(array, start: 0, playPosition: playPosition, repeatMode: GCKMediaRepeatMode.off, customData: nil)
                     requesst?.delegate = self
+                    
                     self._castSession?.remoteMediaClient?.add(self as GCKRemoteMediaClientListener)
                     //  self._castSession?.remoteMediaClient?.setStreamVolume(self._sliderFloatValue!)
                 }
