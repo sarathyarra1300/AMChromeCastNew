@@ -432,7 +432,7 @@ import StoreKit
 //            requesst?.delegate = self
            
             
-            let queueDataBuilder = GCKMediaQueueDataBuilder(queueType: .generic)
+            let queueDataBuilder = GCKMediaQueueDataBuilder(queueType: .movie)
             queueDataBuilder.items = array
             queueDataBuilder.repeatMode = self._castSession?.remoteMediaClient?.mediaStatus?.queueRepeatMode ?? .off
             
