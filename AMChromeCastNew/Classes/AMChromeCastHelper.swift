@@ -250,8 +250,8 @@ import StoreKit
                     }
                 }
                 else {
-                    drmUrl = mediaInformation.licenseUrl
-                    contentType = "video/mp4"
+                  //  drmUrl = mediaInformation.licenseUrl
+                    contentType = "videos/mpd"
                 }
             }
             
