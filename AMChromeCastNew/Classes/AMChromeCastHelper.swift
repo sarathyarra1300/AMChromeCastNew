@@ -217,7 +217,7 @@ import StoreKit
                 metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
                 metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
             }
-            let streamType = ((mediaInformation.contentType == AMChromeCastHelper.kLive) || (mediaInformation.contentType == AMChromeCastHelper.kProgram)) ? GCKMediaStreamType.live : GCKMediaStreamType.buffered
+            let streamType = ((mediaInformation.contentType == AMChromeCastHelper.kLive) || (mediaInformation.contentType == AMChromeCastHelper.kProgram)) ? GCKMediaStreamType.none : GCKMediaStreamType.none
             var playUrl : String = ""
             if mediaInformation.videoUrl != nil {
                 playUrl = mediaInformation.videoUrl!
@@ -250,20 +250,11 @@ import StoreKit
                     }
                 }
                 else {
-                  //    drmUrl = mediaInformation.licenseUrl
-                    contentType = "videos/mpd"
+                    drmUrl = mediaInformation.licenseUrl
+                    contentType = "video/mp4"
                 }
             }
-            
-            //            var customDict = Dictionary<String , Any>()
-            //            // custome
-            //            customDict.updateValue(drmUrl as Any, forKey: "drm_url")
-            //            if _showWatermark == true {
-            //                customDict.updateValue(true, forKey: "showWatermark")
-            //            }
-            //            else {
-            //                customDict.updateValue(false, forKey: "showWatermark")
-            //            }
+            contentType = "video/m3u"
             let customData = mediaInformation.customData
             let fileManager = FileManager.default
             // If the expected store doesn't exist, copy the default store.
@@ -380,7 +371,7 @@ import StoreKit
                     mediaInfoBuilder.streamDuration = duration!
                 }
                 else {
-                    mediaInformation.streamDuration = "100"
+                    mediaInformation.streamDuration = "0"
                 }
                 mediaInfoBuilder.mediaTracks = tracks
                 mediaInfoBuilder.textTrackStyle = nil
@@ -427,11 +418,6 @@ import StoreKit
             else {
                 array = [item1!]
             }
-//            let requesst : GCKRequest? = self._castSession?.remoteMediaClient?.queueLoad(array, start: 0, playPosition: playPosition, repeatMode: GCKMediaRepeatMode.off, customData: nil)
-//            let request = self._castSession?.remoteMediaClient?.loadMedia(with: <#T##GCKMediaLoadRequestData#>)
-//            requesst?.delegate = self
-           
-            
             let queueDataBuilder = GCKMediaQueueDataBuilder(queueType: .movie)
             queueDataBuilder.items = array
             queueDataBuilder.repeatMode = self._castSession?.remoteMediaClient?.mediaStatus?.queueRepeatMode ?? .off
