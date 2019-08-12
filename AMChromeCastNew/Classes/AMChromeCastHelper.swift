@@ -463,6 +463,10 @@ import StoreKit
         
     }
     public func sessionManager(_ sessionManager: GCKSessionManager, didEnd session: GCKSession, withError error: Error?) {
+        if self._castSession != nil {
+            self._castSession = nil
+        }
+
         self.delegate?.isDeviceConnectedTochromeCast(isconnected: false)
     }
     
