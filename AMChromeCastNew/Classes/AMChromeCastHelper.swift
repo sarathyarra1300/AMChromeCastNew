@@ -102,67 +102,21 @@ import StoreKit
     public func didUpdateDeviceList()  {
         
     }
-    //MARK : play the content in remote
-@objc public  func switchToRemotePlayback() {
-        if self.hasConnectedSession() == true {
-            self._castSession = _sessionManager?.currentCastSession
-            if _playbackMode == PlaybackMode.local {
-                var playPosition = TimeInterval()
-                if _currentPlaybackTime != nil {
-                    playPosition = _currentPlaybackTime!
-                }
-                else {
-                    playPosition = 0
-                }
-                let paused = false
-                let builder =  GCKMediaQueueItemBuilder()
-                let builder1 = GCKMediaQueueItemBuilder()
-                self.buildMediaInformation(mediaInformation: _mediaInformation!) { (_ mediaInfoo: GCKMediaInformation?, _ mediaInfoo1: GCKMediaInformation, _ error:Error? ) in
-                    var item : GCKMediaQueueItem?
-                    if mediaInfoo != nil {
-                        builder.mediaInformation = mediaInfoo
-                        builder.autoplay = !paused
-                        builder.preloadTime = 0
-                        item = builder.build()
-                    }
-                    
-                    builder1.mediaInformation = mediaInfoo1
-                    builder1.autoplay = !paused
-                    builder1.preloadTime = 0
-                    let item1 : GCKMediaQueueItem? = builder1.build()
-                    
-                    var array : [GCKMediaQueueItem]!;
-                    if mediaInfoo != nil {
-                        array = [item!,item1!];
-                    }
-                    else {
-                        array = [item1!]
-                    }
-                    let requesst : GCKRequest? = self._castSession?.remoteMediaClient?.queueLoad(array, start: 0, playPosition: playPosition, repeatMode: GCKMediaRepeatMode.off, customData: nil)
-                    requesst?.delegate = self
-                    
-                    self._castSession?.remoteMediaClient?.add(self as GCKRemoteMediaClientListener)
-                    //  self._castSession?.remoteMediaClient?.setStreamVolume(self._sliderFloatValue!)
-                }
-            }
-            
-        }
-    }
     //MARK : play the content in local
     func switchToLocalPlayback()
     {
-        if _playbackMode == PlaybackMode.local {
-            return
-        }
-        var playPosition: TimeInterval = 0
-        var paused = false
-        var ended = false
-        
-        if _playbackMode == PlaybackMode.remote {
-            playPosition = (_castMediaController?.lastKnownStreamPosition)!
-            paused = _castMediaController?.lastKnownPlayerState == GCKMediaPlayerState.paused
-            ended = _castMediaController?.lastKnownPlayerState == GCKMediaPlayerState.idle
-        }
+//        if _playbackMode == PlaybackMode.local {
+//            return
+//        }
+//        var playPosition: TimeInterval = 0
+//        var paused = false
+//        var ended = false
+//
+//        if _playbackMode == PlaybackMode.remote {
+//            playPosition = (_castMediaController?.lastKnownStreamPosition)!
+//            paused = _castMediaController?.lastKnownPlayerState == GCKMediaPlayerState.paused
+//            ended = _castMediaController?.lastKnownPlayerState == GCKMediaPlayerState.idle
+//        }
         
     }
     
@@ -181,7 +135,7 @@ import StoreKit
                     metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
                     metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
                 }
-               
+                
                 
                 let streamType = GCKMediaStreamType.buffered
                 let contentType = _mediaInformation?.contentFormate
@@ -217,173 +171,36 @@ import StoreKit
                 metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
                 metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
             }
-            let streamType = ((mediaInformation.contentType == AMChromeCastHelper.kLive) || (mediaInformation.contentType == AMChromeCastHelper.kProgram)) ? GCKMediaStreamType.none : GCKMediaStreamType.none
+            let streamType = ((mediaInformation.contentType == AMChromeCastHelper.kLive) || (mediaInformation.contentType == AMChromeCastHelper.kProgram)) ? GCKMediaStreamType.live : GCKMediaStreamType.buffered
             var playUrl : String = ""
             if mediaInformation.videoUrl != nil {
                 playUrl = mediaInformation.videoUrl!
             }
-            var contentType = "video/mp4"
-            if playUrl.contains("mpd") {
-                contentType = "videos/mpd"
-            }
-            _videoPlayURL = playUrl
-            var drmUrl : String?
-            if mediaInformation.playFairPlay == true {
-                if playUrl.contains("dlb.ism") {
-                    if mediaInformation.chromecastDolbyUrl != nil {
-                        playUrl = mediaInformation.chromecastDolbyUrl!
-                        drmUrl = mediaInformation.licenseUrl
-                        contentType = "videos/mpd"
-                    }
-                }
-                else {
-                    drmUrl = mediaInformation.licenseUrl
-                    contentType = "application/vnd.ms-sstr+xml"
-                }
-            }
-            else {
-                if playUrl.contains("dlb.ism") {
-                    if mediaInformation.chromecastDolbyUrl != nil {
-                        playUrl = mediaInformation.chromecastDolbyUrl!
-                        drmUrl = mediaInformation.licenseUrl
-                        contentType = "videos/mpd"
-                    }
-                }
-                else {
-                    drmUrl = mediaInformation.licenseUrl
-                    contentType = "video/mp4"
-                }
-            }
-            contentType = "video/m3u"
+            let contentType = "video/mp4"
             let customData = mediaInformation.customData
-            let fileManager = FileManager.default
-            // If the expected store doesn't exist, copy the default store.
-            // If the expected store doesn't exist, copy the default store.
-            // if ([[[_videoPlayURL absoluteURL] scheme] isEqualToString:@"file"])
-            // if ([_videoPlayURL isFileURL] == YES )
-            if fileManager.fileExists(atPath: _videoPlayURL!) {
-                if mediaInformation.isconnectedToNetwork == false {
-                    // let castAlert = UIAlertView(title: "Alert", message: "We cant cast any video. Please check your internet connection.", delegate: self as! UIAlertViewDelegate, cancelButtonTitle: "OK", otherButtonTitles: "")
-                    // castAlert.show()
-                    
-                    //                    let alert = UIAlertController(title: "Alert", message:"We cant cast any video. Please check your internet connection.", preferredStyle: UIAlertControllerStyle.alert)
-                    //                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    //                    self.present(alert, animated: true, completion: nil)
-                    
-                    return
-                }
-                self.delegate?.getstreamUrl(completionHandler: { (streamUrl:String?,videoInfo: [AnyHashable: Any]?, error: Error?) in
-                    _videoPlayURL = streamUrl
-                    var playUrl: String = _videoPlayURL!
-                    if playUrl.contains("&dw=") && ((_contentType == AMChromeCastHelper.kLive) || (_contentType == AMChromeCastHelper.kProgram)) {
-                        playUrl = playUrl.components(separatedBy: "&dw=")[0]
-                        playUrl = "\(playUrl)&dw=0"
-                    }
-                    var tracks = [GCKMediaTrack]()
-                    if let subTilteUrl = _subTitleUrl {
-                        let englishSub = GCKMediaTrack(identifier: 1, contentIdentifier: (subTilteUrl as String) + ".vtt", contentType: "text/vtt", type: GCKMediaTrackType.text, textSubtype: GCKMediaTextTrackSubtype.subtitles, name:"English", languageCode: "en-US", customData: nil)
-                        tracks = [englishSub]
-                    }
-                    
-                    if let videoURl = _videoPlayURL {
-                        if videoURl.contains("mpd") {
-                            contentType = "videos/mpd"
-                        }
-                    }
-                    
-                    var drmUrl: String?
-                    //for license request for fair play
-                    if _playFairPlay == true {
-                        if playUrl.contains("dlb.ism") {
-                            if let chromeCastDolbyUrl = _chromecastDolbyUrl {
-                                playUrl = chromeCastDolbyUrl
-                                let licenseUrl : URL? = _licenseUrl
-                                drmUrl = licenseUrl?.absoluteString
-                                contentType = "videos/mpd"
-                            }
-                        }
-                        else {
-                            drmUrl = _licenseUrl?.absoluteString
-                            contentType = "application/vnd.ms-sstr+xml"
-                        }
-                        
-                    }
-                    else {
-                        if playUrl.contains("dlb.ism") {
-                            if let chromeCastDolbyUrl = _chromecastDolbyUrl {
-                                playUrl = chromeCastDolbyUrl
-                                let licenseUrl : URL? = _licenseUrl
-                                drmUrl = licenseUrl?.absoluteString
-                                contentType = "videos/mpd"
-                            }
-                            
-                        }
-                        else {
-                            drmUrl = _licenseUrl?.absoluteString
-                            contentType = "videos/mpd"
-                        }
-                        
-                    }
-                    
-                    var customDict = Dictionary<String , Any>()
-                    // custome
-                    customDict.updateValue(drmUrl as Any, forKey: "drm_url")
-                    if _showWatermark == true {
-                        customDict.updateValue(true, forKey: "showWatermark")
-                    }
-                    else {
-                        customDict.updateValue(false, forKey: "showWatermark")
-                    }
-                    let customData = customDict
-                    let mediaInfoBuilder = GCKMediaInformationBuilder(contentURL:URL(string: playUrl)!)
-                    mediaInfoBuilder.contentID = playUrl
-                    mediaInfoBuilder.streamType = streamType
-                    mediaInfoBuilder.contentType = contentType
-                    mediaInfoBuilder.metadata = metadata
-                    mediaInfoBuilder.streamDuration = 1
-                    mediaInfoBuilder.mediaTracks = tracks
-                    mediaInfoBuilder.textTrackStyle = nil
-                    mediaInfoBuilder.customData = customData
-                    
-                    let mediaInfo : GCKMediaInformation = mediaInfoBuilder.build()
-                    completionHandler(mediaAds,mediaInfo,nil)
-                })
+            let strDuration = mediaInformation.streamDuration
+            let duration = (strDuration as NSString?)?.doubleValue
+            let mediaInfoBuilder = GCKMediaInformationBuilder(contentURL:URL(string: playUrl)!)
+            mediaInfoBuilder.contentID = playUrl
+            mediaInfoBuilder.streamType = streamType
+            mediaInfoBuilder.contentType = contentType
+            mediaInfoBuilder.metadata = metadata
+            if duration != nil {
+                mediaInfoBuilder.streamDuration = duration!
             }
             else {
-                if playUrl.contains("&dw=") && ((mediaInformation.contentType == AMChromeCastHelper.kLive) || (mediaInformation.contentType == AMChromeCastHelper.kProgram)) {
-                    playUrl = playUrl.components(separatedBy: "&dw=")[0]
-                    playUrl = "\(playUrl)&dw=0"
-                }
-                let strDuration = mediaInformation.streamDuration
-                let duration = (strDuration as NSString?)?.doubleValue
-                var tracks = [GCKMediaTrack]()
-                if _subTitleUrl != nil {
-                    let englishSub = GCKMediaTrack(identifier: 1, contentIdentifier: (mediaInformation.subTilteUrl! as String) + ".vtt", contentType: "text/vtt", type: GCKMediaTrackType.text, textSubtype: GCKMediaTextTrackSubtype.subtitles, name:"English", languageCode: "en-US", customData: nil)
-                    tracks = [englishSub]
-                }
-                
-                let mediaInfoBuilder = GCKMediaInformationBuilder(contentURL:URL(string: playUrl)!)
-                mediaInfoBuilder.contentID = playUrl
-                mediaInfoBuilder.streamType = streamType
-                mediaInfoBuilder.contentType = contentType
-                mediaInfoBuilder.metadata = metadata
-                if duration != nil {
-                    mediaInfoBuilder.streamDuration = duration!
-                }
-                else {
-                    mediaInformation.streamDuration = "0"
-                }
-                mediaInfoBuilder.mediaTracks = tracks
-                mediaInfoBuilder.textTrackStyle = nil
-                mediaInfoBuilder.customData = customData
-                
-                let mediaInfo : GCKMediaInformation = mediaInfoBuilder.build()
-                completionHandler(mediaAds,mediaInfo,nil)
+                mediaInformation.streamDuration = "0"
             }
+            mediaInfoBuilder.mediaTracks = nil
+            mediaInfoBuilder.textTrackStyle = nil
+            mediaInfoBuilder.customData = customData
+            
+            let mediaInfo : GCKMediaInformation = mediaInfoBuilder.build()
+            completionHandler(mediaAds,mediaInfo,nil)
         }
     }
     
-    // By using this mehtod we have to play the content in chrome cast
+        //MARK : play the content in remote
     @objc public  func playTheContentInChromeCast(mediaInform : AMMediaInformation) {
          self._castSession = _sessionManager?.currentCastSession
         _mediaInformation = mediaInform
@@ -420,8 +237,7 @@ import StoreKit
             }
             let queueDataBuilder = GCKMediaQueueDataBuilder(queueType: .movie)
             queueDataBuilder.items = array
-            queueDataBuilder.repeatMode = self._castSession?.remoteMediaClient?.mediaStatus?.queueRepeatMode ?? .off
-            
+            queueDataBuilder.repeatMode =  .off
             let mediaLoadRequestDataBuilder = GCKMediaLoadRequestDataBuilder()
             mediaLoadRequestDataBuilder.queueData = queueDataBuilder.build()
             
