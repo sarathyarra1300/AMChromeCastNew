@@ -235,15 +235,17 @@ import StoreKit
             else {
                 array = [item1!]
             }
-            let queueDataBuilder = GCKMediaQueueDataBuilder(queueType: .movie)
-            queueDataBuilder.items = array
-            queueDataBuilder.repeatMode =  .off
-            let mediaLoadRequestDataBuilder = GCKMediaLoadRequestDataBuilder()
-            mediaLoadRequestDataBuilder.queueData = queueDataBuilder.build()
+//            let queueDataBuilder = GCKMediaQueueDataBuilder(queueType: .movie)
+//            queueDataBuilder.items = array
+//            queueDataBuilder.repeatMode =  .off
+//            let mediaLoadRequestDataBuilder = GCKMediaLoadRequestDataBuilder()
+//            mediaLoadRequestDataBuilder.queueData = queueDataBuilder.build()
+//
+//            let request = self._castSession?.remoteMediaClient?.loadMedia(with: mediaLoadRequestDataBuilder.build())
+//            request!.delegate = self
             
-            let request = self._castSession?.remoteMediaClient?.loadMedia(with: mediaLoadRequestDataBuilder.build())
-            request!.delegate = self
-            
+            let request: GCKRequest? = self._castSession?.remoteMediaClient?.queueLoad(array, start: 0, playPosition: playPosition, repeatMode: GCKMediaRepeatMode.off, customData: nil)
+            request?.delegate = self
             self._castSession?.remoteMediaClient?.add(self as GCKRemoteMediaClientListener)
             self._castSession?.remoteMediaClient?.setStreamVolume(0.5)
         }
