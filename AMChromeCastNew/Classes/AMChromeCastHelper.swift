@@ -11,8 +11,20 @@ import StoreKit
 
 @objc public protocol AMChromeCastHelperDelegate: NSObjectProtocol {
     @objc func getstreamUrl(completionHandler:(_ streamUrl:String?,_ videoInfo: [AnyHashable: Any]?,_ error: Error?) -> Void)
-    func getMediaInformation(completionHandler:(_ mediaObject:AMMediaInformation?, _ playBackMode : PlaybackMode) -> Void)
-    func isDeviceConnectedTochromeCast(isconnected :Bool)
+    @objc optional func getMediaInformation(completionHandler:(_ mediaObject:AMMediaInformation?, _ playBackMode : PlaybackMode) -> Void)
+    @objc optional  func isDeviceConnectedTochromeCast(isconnected :Bool)
+    
+    @objc optional  func sessionManager(_ sessionManager: GCKSessionManager, didStart session: GCKSession)
+    
+    @objc optional  func sessionManager(_ sessionManager: GCKSessionManager, didResumeSession session: GCKSession)
+    
+    @objc optional  func sessionManager(_ sessionManager: GCKSessionManager, didResumeCastSession session: GCKCastSession)
+    
+    @objc optional  func sessionManager(_ sessionManager: GCKSessionManager, didEnd session: GCKSession, withError error: Error?)
+    
+    @objc optional func sessionManager(_ sessionManager: GCKSessionManager, didFailToStart session: GCKSession, withError error: Error)
+    
+    @objc optional  func sessionManager(_ sessionManager: GCKSessionManager, willStart session: GCKSession)
 }
 
 
@@ -257,27 +269,26 @@ import StoreKit
     
     //MARK : GCKSessionManagerListener Methods
     public func sessionManager(_ sessionManager: GCKSessionManager, didStart session: GCKSession) {
-        self.delegate?.isDeviceConnectedTochromeCast(isconnected: true)
+        self.delegate?.sessionManager!(sessionManager, didStart: session)
     }
     public func sessionManager(_ sessionManager: GCKSessionManager, willStart session: GCKSession) {
-        
+        self.delegate?.sessionManager!(sessionManager, willStart: session)
     }
     public func sessionManager(_ sessionManager: GCKSessionManager, didResumeSession session: GCKSession) {
-        
+        self.delegate?.sessionManager!(sessionManager, didResumeSession: session)
     }
     public func sessionManager(_ sessionManager: GCKSessionManager, didResumeCastSession session: GCKCastSession) {
-        
+        self.delegate?.sessionManager!(sessionManager, didResumeCastSession: session)
     }
     public func sessionManager(_ sessionManager: GCKSessionManager, didEnd session: GCKSession, withError error: Error?) {
         if self._castSession != nil {
             self._castSession = nil
         }
-
-        self.delegate?.isDeviceConnectedTochromeCast(isconnected: false)
+        self.delegate?.sessionManager!(sessionManager, didEnd: session, withError: error)
     }
     
     public func sessionManager(_ sessionManager: GCKSessionManager, didFailToStart session: GCKSession, withError error: Error) {
-        
+        self.delegate?.sessionManager!(sessionManager, didFailToStart: session, withError: error)
     }
     
     private func requestDidComplete(_ request: GCKRequest) {
