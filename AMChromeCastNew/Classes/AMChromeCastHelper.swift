@@ -135,12 +135,9 @@ import StoreKit
                     metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
                     metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
                 }
-                
-                
                 let streamType = GCKMediaStreamType.buffered
                 let contentType = _mediaInformation?.contentFormate
                 let playerUrl : String? = adUrlString
-                
                 let mediaInfoBuilder = GCKMediaInformationBuilder(contentURL:URL(string: playerUrl!)!)
                 mediaInfoBuilder.contentID = playerUrl
                 mediaInfoBuilder.streamType = streamType
@@ -159,7 +156,7 @@ import StoreKit
         }
         
         // here we are sending type as Movie, because for livetv and tvshows the title and description not coming in chromecast screen
-        metadata = GCKMediaMetadata(metadataType: GCKMediaMetadataType.movie)
+          metadata = GCKMediaMetadata(metadataType: GCKMediaMetadataType.movie)
         if metadata != nil {
             if mediaInformation.contentTitle != nil {
                 metadata?.setString(mediaInformation.contentTitle!, forKey: kGCKMetadataKeyTitle)
@@ -176,7 +173,7 @@ import StoreKit
             if mediaInformation.videoUrl != nil {
                 playUrl = mediaInformation.videoUrl!
             }
-            let contentType = "video/mp4"
+            let contentType = mediaInformation.contentStreamExtension
             let customData = mediaInformation.customData
             let strDuration = mediaInformation.streamDuration
             let duration = (strDuration as NSString?)?.doubleValue

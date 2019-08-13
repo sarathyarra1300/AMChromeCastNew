@@ -33,4 +33,6 @@ import GoogleCast
     @objc public var playFairPlay : Bool = false
     @objc public var chromecastDolbyUrl : String?
     @objc public var isconnectedToNetwork : Bool = false
+    @objc public var contentStreamExtension : String? = nil
+
 }
