@@ -27,6 +27,7 @@ import StoreKit
 @objc public class AMChromeCastHelper: NSObject,GCKLoggerDelegate,GCKSessionManagerListener,GCKDiscoveryManagerListener,GCKRequestDelegate,GCKRemoteMediaClientListener {
     @objc public  static let sharedInstance: AMChromeCastHelper = { AMChromeCastHelper() }()
     @objc public var kReceiverAppID = ""
+    
     @objc public var castButton: GCKUICastButton!
     var _sessionManager : GCKSessionManager?
     var _castMediaController: GCKUIMediaController?
