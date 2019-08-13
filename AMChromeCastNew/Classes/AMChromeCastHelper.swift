@@ -27,6 +27,7 @@ import StoreKit
 @objc public class AMChromeCastHelper: NSObject,GCKLoggerDelegate,GCKSessionManagerListener,GCKDiscoveryManagerListener,GCKRequestDelegate,GCKRemoteMediaClientListener {
     @objc public  static let sharedInstance: AMChromeCastHelper = { AMChromeCastHelper() }()
     @objc public var kReceiverAppID = ""
+//    @objc public var castButton: GCKUICastButton!
     var _sessionManager : GCKSessionManager?
     var _castMediaController: GCKUIMediaController?
     var _mediaInformation : AMMediaInformation?
@@ -83,11 +84,10 @@ import StoreKit
         _sessionManager!.add(self)
     }
     
-    @objc public   func showChromeCastButton(frame : CGRect,viewcontroller : UIViewController)  {
-        let chromeBtn = GCKUICastButton.init(frame: frame)
-        chromeBtn.tintColor = UIColor.white
-        viewcontroller.view.addSubview(chromeBtn)
-        
+    @objc public   func showChromeCastButton(frame : CGRect,view : UIView)  {
+        let castButton = GCKUICastButton.init(frame: frame)
+        castButton.tintColor = UIColor.white
+          view.addSubview(castButton)
     }
     
     //MARK : checking for chrome cast is connected or not
