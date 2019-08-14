@@ -182,8 +182,8 @@ import StoreKit
                 metadata?.setString(mediaInformation.subTitle!, forKey: kGCKMetadataKeySubtitle)
             }
             if mediaInformation.imageUrl != nil {
-                metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
-                metaDataAds?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
+                metadata?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
+                metadata?.addImage(GCKImage(url: mediaInformation.imageUrl!, width: 480, height: 720))
             }
             let streamType = ((mediaInformation.contentType == AMChromeCastHelper.kLive) || (mediaInformation.contentType == AMChromeCastHelper.kProgram)) ? GCKMediaStreamType.live : GCKMediaStreamType.buffered
             var playUrl : String = ""
