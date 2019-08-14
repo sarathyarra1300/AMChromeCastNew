@@ -36,4 +36,5 @@ import GoogleCast
     @objc public var contentStreamExtension : String? = nil
      public var metaDataType : GCKMediaMetadataType? = nil
 
+
 }

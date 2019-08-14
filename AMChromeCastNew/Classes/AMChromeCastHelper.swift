@@ -178,7 +178,7 @@ import StoreKit
             if mediaInformation.contentTitle != nil {
                 metadata?.setString(mediaInformation.contentTitle!, forKey: kGCKMetadataKeyTitle)
             }
-            if _strSubTitle != nil {
+            if mediaInformation.subTitle != nil {
                 metadata?.setString(mediaInformation.subTitle!, forKey: kGCKMetadataKeySubtitle)
             }
             if mediaInformation.imageUrl != nil {
