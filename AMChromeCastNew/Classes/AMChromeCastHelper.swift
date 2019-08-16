@@ -84,7 +84,7 @@ import StoreKit
     @objc public   func initializeGoogleChromeCast(receiverId : String) {
         kReceiverAppID = receiverId
         let criteria = GCKDiscoveryCriteria(applicationID: kReceiverAppID)
-            let options = GCKCastOptions.init(receiverApplicationID: kReceiverAppID)
+            let options = GCKCastOptions.init(discoveryCriteria: criteria)
             GCKCastContext.setSharedInstanceWith(options)
             _castMediaController = GCKUIMediaController()
             

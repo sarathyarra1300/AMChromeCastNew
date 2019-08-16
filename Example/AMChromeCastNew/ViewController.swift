@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        AMChromeCastHelper.sharedInstance.initializeGoogleChromeCast(receiverId: "")
+        AMChromeCastHelper.sharedInstance.initializeGoogleChromeCast(receiverId: "4AAD7041")
     
     }
 
