@@ -84,17 +84,20 @@ import StoreKit
     @objc public   func initializeGoogleChromeCast(receiverId : String) {
         kReceiverAppID = receiverId
         let criteria = GCKDiscoveryCriteria(applicationID: kReceiverAppID)
-        let options = GCKCastOptions.init(discoveryCriteria: criteria)
-        GCKCastContext.setSharedInstanceWith(options)
-        _castMediaController = GCKUIMediaController()
-        
-        // Enable logger.
-        GCKLogger.sharedInstance().delegate = self
-        
-        GCKCastContext.sharedInstance().useDefaultExpandedMediaControls = true
-        
-        _sessionManager = GCKCastContext.sharedInstance().sessionManager
-        _sessionManager!.add(self)
+        if criteria != nil && criteria.allSubtypes.count > 0 {
+            let options = GCKCastOptions.init(discoveryCriteria: criteria)
+            GCKCastContext.setSharedInstanceWith(options)
+            _castMediaController = GCKUIMediaController()
+            
+            // Enable logger.
+            GCKLogger.sharedInstance().delegate = self
+            
+            GCKCastContext.sharedInstance().useDefaultExpandedMediaControls = true
+            
+            _sessionManager = GCKCastContext.sharedInstance().sessionManager
+            _sessionManager!.add(self)
+        }
+      
     }
     
     @objc public   func showChromeCastButton(frame : CGRect,view : UIView)  {
