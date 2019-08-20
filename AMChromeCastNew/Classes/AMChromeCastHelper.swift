@@ -205,7 +205,12 @@ import StoreKit
             else {
                 mediaInformation.streamDuration = "0"
             }
-            mediaInfoBuilder.mediaTracks = nil
+            var tracks = [GCKMediaTrack]()
+            if mediaInformation.subTilteUrl != nil {
+                let englishSub = GCKMediaTrack(identifier: 1, contentIdentifier: mediaInformation.subTilteUrl! + ".vtt", contentType: mediaInformation.subTitleContentType!, type: GCKMediaTrackType.text, textSubtype: GCKMediaTextTrackSubtype.subtitles, name:mediaInformation.subTitlesLangName, languageCode: mediaInformation.subTitlesLangCode, customData: nil)
+                tracks = [englishSub]
+            }
+            mediaInfoBuilder.mediaTracks = tracks
             mediaInfoBuilder.textTrackStyle = nil
             mediaInfoBuilder.customData = customData
             
