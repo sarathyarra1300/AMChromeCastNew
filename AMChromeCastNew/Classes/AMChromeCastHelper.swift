@@ -207,7 +207,7 @@ import StoreKit
             }
             var tracks = [GCKMediaTrack]()
             if mediaInformation.subTilteUrl != nil {
-                let englishSub = GCKMediaTrack(identifier: 1, contentIdentifier: mediaInformation.subTilteUrl! + ".vtt", contentType: mediaInformation.subTitleContentType!, type: GCKMediaTrackType.text, textSubtype: GCKMediaTextTrackSubtype.subtitles, name:mediaInformation.subTitlesLangName, languageCode: mediaInformation.subTitlesLangCode, customData: nil)
+                let englishSub = GCKMediaTrack(identifier: 1, contentIdentifier: mediaInformation.subTilteUrl!, contentType: mediaInformation.subTitleContentType!, type: GCKMediaTrackType.text, textSubtype: GCKMediaTextTrackSubtype.subtitles, name:mediaInformation.subTitlesLangName, languageCode: mediaInformation.subTitlesLangCode, customData: nil)
                 tracks = [englishSub]
             }
             mediaInfoBuilder.mediaTracks = tracks
